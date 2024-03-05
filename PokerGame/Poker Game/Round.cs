@@ -5,7 +5,7 @@ namespace Poker_Game
     public class Round
     {
         private int pot;
-        private enum roundStatus
+        private enum RoundStatus
         {
             Preflop,
             Flop,
