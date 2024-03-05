@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Михаил\\source\\repos\\Poker Game\\Poker Game\\Poker Game.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Михаил\\source\\repos\\Poker Game\\Poker Game\\Poker Game.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Михаил\\source\\repos\\Poker Game\\Poker Game\\Poker Game.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj",
         "projectName": "Poker Game",
-        "projectPath": "C:\\Users\\Михаил\\source\\repos\\Poker Game\\Poker Game\\Poker Game.csproj",
-        "packagesPath": "C:\\Users\\Михаил\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Михаил\\source\\repos\\Poker Game\\Poker Game\\obj\\",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Михаил\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -62,7 +58,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

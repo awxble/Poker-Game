@@ -1,0 +1,17 @@
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\bin\Debug\net6.0-windows\Poker Game.exe
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\bin\Debug\net6.0-windows\Poker Game.deps.json
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\bin\Debug\net6.0-windows\Poker Game.runtimeconfig.json
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\bin\Debug\net6.0-windows\Poker Game.dll
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\bin\Debug\net6.0-windows\Poker Game.pdb
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker_Game.Form1.resources
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.dll
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\refint\Poker Game.dll
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.pdb
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.genruntimeconfig.cache
+C:\Users\User\Documents\GitHub\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\ref\Poker Game.dll
