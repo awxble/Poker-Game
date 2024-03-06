@@ -6,7 +6,10 @@ namespace Poker_Game
         {
             InitializeComponent();
 
+            //TestBox.Image = Image.FromFile("Materials\\spades_ace.png");
         }
+
+        
         private Random random = new Random();
         private string[] cards = { "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "jh", "qh", "kh", "ah",
                                    "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "js", "qs", "ks", "as",
