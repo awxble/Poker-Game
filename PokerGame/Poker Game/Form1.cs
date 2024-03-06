@@ -1,10 +1,12 @@
 namespace Poker_Game
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
-        public Form1()
+        public GameForm()
         {
             InitializeComponent();
+            TestBox.Image = Image.FromFile("Графика\\spades_ace.png");
         }
+
     }
 }

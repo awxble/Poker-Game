@@ -1,6 +1,6 @@
 ﻿namespace Poker_Game
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,26 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            button1 = new Button();
+            TestBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)TestBox).BeginInit();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
+            button1.Location = new Point(0, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 0;
             // 
-            // Form1
+            // TestBox
             // 
-            this.ClientSize = new System.Drawing.Size(782, 353);
-            this.Name = "Form1";
-            this.ResumeLayout(false);
-
+            TestBox.BackColor = Color.GreenYellow;
+            TestBox.Location = new Point(280, 95);
+            TestBox.Name = "TestBox";
+            TestBox.Size = new Size(99, 162);
+            TestBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            TestBox.TabIndex = 0;
+            TestBox.TabStop = false;
+            // 
+            // GameForm
+            // 
+            AutoSize = true;
+            BackColor = Color.Green;
+            ClientSize = new Size(1161, 658);
+            Controls.Add(TestBox);
+            ForeColor = Color.Black;
+            Name = "GameForm";
+            WindowState = FormWindowState.Maximized;
+            ((System.ComponentModel.ISupportInitialize)TestBox).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         private Button button1;
+        private PictureBox TestBox;
     }
 }
