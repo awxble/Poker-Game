@@ -16,7 +16,7 @@ namespace Poker_Game
         {
             int randomNumber = random.Next(0, 52);
 
-            TestBox.Image = Image.FromFile($"Графика\\{cards[randomNumber]}.png");
+            TestBox.Image = Image.FromFile($"Materials\\{cards[randomNumber]}.png");
         }
     }
 }
