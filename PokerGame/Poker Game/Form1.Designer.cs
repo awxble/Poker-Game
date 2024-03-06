@@ -30,6 +30,7 @@
         {
             button1 = new Button();
             TestBox = new PictureBox();
+            generateBatton = new Button();
             ((System.ComponentModel.ISupportInitialize)TestBox).BeginInit();
             SuspendLayout();
             // 
@@ -43,18 +44,29 @@
             // TestBox
             // 
             TestBox.BackColor = Color.GreenYellow;
-            TestBox.Location = new Point(280, 95);
+            TestBox.Location = new Point(61, 77);
             TestBox.Name = "TestBox";
             TestBox.Size = new Size(99, 162);
             TestBox.SizeMode = PictureBoxSizeMode.StretchImage;
             TestBox.TabIndex = 0;
             TestBox.TabStop = false;
             // 
+            // generateBatton
+            // 
+            generateBatton.Location = new Point(281, 158);
+            generateBatton.Name = "generateBatton";
+            generateBatton.Size = new Size(113, 37);
+            generateBatton.TabIndex = 1;
+            generateBatton.Text = "Сгенерировать";
+            generateBatton.UseVisualStyleBackColor = true;
+            generateBatton.Click += generateBatton_Click;
+            // 
             // GameForm
             // 
             AutoSize = true;
             BackColor = Color.Green;
             ClientSize = new Size(1161, 658);
+            Controls.Add(generateBatton);
             Controls.Add(TestBox);
             ForeColor = Color.Black;
             Name = "GameForm";
@@ -67,5 +79,6 @@
 
         private Button button1;
         private PictureBox TestBox;
+        private Button generateBatton;
     }
 }
