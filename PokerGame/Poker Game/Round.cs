@@ -16,6 +16,8 @@ namespace Poker_Game
         private void CheckEndOfBetting() { }
         private void ChangeActivePlayer() { }
         private void ChangeNewRound() { }
-        private void DealCards() { }
+        private void DealCards() { 
+            
+        }
     }
 }
