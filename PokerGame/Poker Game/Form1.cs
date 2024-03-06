@@ -5,13 +5,11 @@ namespace Poker_Game
         public GameForm()
         {
             InitializeComponent();
-<<<<<<< HEAD
-            TestBox.Image = Image.FromFile("Ð“Ñ€Ð°Ñ„Ð¸ÐºÐ°\\spades_ace.png");
-        }
-=======
->>>>>>> 6bc9ee72a1db94043e13db8eee8a3cc79711019f
 
+            //TestBox.Image = Image.FromFile("Materials\\spades_ace.png");
         }
+
+        
         private Random random = new Random();
         private string[] cards = { "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "jh", "qh", "kh", "ah",
                                    "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "10s", "js", "qs", "ks", "as",
@@ -21,7 +19,7 @@ namespace Poker_Game
         {
             int randomNumber = random.Next(0, 52);
 
-            TestBox.Image = Image.FromFile($"Ãðàôèêà\\{cards[randomNumber]}.png");
+            TestBox.Image = Image.FromFile($"Materials\\{cards[randomNumber]}.png");
         }
     }
 }
