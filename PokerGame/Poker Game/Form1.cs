@@ -18,7 +18,7 @@ namespace Poker_Game
 
 
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void betButton_Click(object sender, EventArgs e)
         {
             previousCard = deck.cards[randomNumber];
             randomNumber = random.Next(0, 52);
@@ -35,7 +35,7 @@ namespace Poker_Game
             }
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void foldButton_Click(object sender, EventArgs e)
         {
             previousCard = deck.cards[randomNumber];
             randomNumber = random.Next(0, 52);

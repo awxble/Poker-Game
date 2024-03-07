@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj": {}
+    "C:\\Users\\User\\Desktop\\Poker\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj": {
+    "C:\\Users\\User\\Desktop\\Poker\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Poker\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj",
         "projectName": "Poker Game",
-        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\Poker\\Poker-Game\\PokerGame\\Poker Game\\Poker Game.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Poker-Game\\PokerGame\\Poker Game\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Poker\\Poker-Game\\PokerGame\\Poker Game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
