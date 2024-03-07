@@ -52,3 +52,4 @@ C:\Users\User\Desktop\Poker\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-win
 C:\Users\User\Desktop\Poker\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.pdb
 C:\Users\User\Desktop\Poker\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker Game.genruntimeconfig.cache
 C:\Users\User\Desktop\Poker\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\ref\Poker Game.dll
+C:\Users\User\Desktop\Poker\Poker-Game\PokerGame\Poker Game\obj\Debug\net6.0-windows\Poker_Game.Resource.resources

@@ -2,54 +2,33 @@ namespace Poker_Game
 {
     public partial class GameForm : Form
     {
-        private Game game = new Game();
+        private Player[] players = new Player[] { new Player(), new Player(), new Player(), new Player() };
         private Deck deck = new Deck();
-        private Random random = new Random();
-        private string previousCard = "";
-        private int randomNumber;
-        private int score = 0;
+        private PictureBox[] cardImageArray;
 
         public GameForm()
         {
             InitializeComponent();
-            randomNumber = random.Next(0, 52);
-            TestBox.Image = Image.FromFile($"Materials\\{deck.cards[randomNumber]}.png");
+            cardImageArray = new PictureBox[] { cardImage0_P0, cardImage1_P0, cardImage0_P1, cardImage1_P1, cardImage0_P2, 
+                cardImage1_P2, cardImage0_P3, cardImage1_P3, cardImage0, cardImage1, cardImage2, cardImage3, cardImage4 };
+
+            for (int i = 0; i < 13; i++)
+            {
+                cardImageArray[i].Image = Image.FromFile($"Materials\\{deck.shuffledCards[i]}.png");
+            }
+            deck.Shuffle();
         }
 
-
-
-        private void betButton_Click(object sender, EventArgs e)
+        public void betButton_Click(object sender, EventArgs e)
         {
-            previousCard = deck.cards[randomNumber];
-            randomNumber = random.Next(0, 52);
-            TestBox.Image = Image.FromFile($"Materials\\{deck.cards[randomNumber]}.png");
-            if (game.defineCardValue(previousCard) <= game.defineCardValue(deck.cards[randomNumber]))
-            {
-                score++;
-                label1.Text = score.ToString();
-            }
-            else
-            {
-                score = 0;
-                label1.Text = "0";
-            }
+            players[0].balance -= 100;
+            balanceFieldP0.Text = players[0].balance.ToString();
+            bidFieldP0.Text = (1000 - players[0].balance).ToString();
         }
 
         private void foldButton_Click(object sender, EventArgs e)
         {
-            previousCard = deck.cards[randomNumber];
-            randomNumber = random.Next(0, 52);
-            TestBox.Image = Image.FromFile($"Materials\\{deck.cards[randomNumber]}.png");
-            if (game.defineCardValue(previousCard) >= game.defineCardValue(deck.cards[randomNumber]))
-            {
-                score++;
-                label1.Text = score.ToString();
-            }
-            else
-            {
-                score = 0;
-                label1.Text = "0";
-            }
+
         }
     }
 }

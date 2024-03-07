@@ -3,13 +3,8 @@ using System.DirectoryServices;
 
 namespace Poker_Game
 {
-    public class Game
+    public partial class Game
     {
-        public static Player[] players = new Player[] {new Player(0), new Player(1), new Player(2), new Player(3)};
-        private Deck deck = new Deck();
-        private Random random = new Random();
-        public int randomNumber;
-
         public void StartGame() {
 
         }
