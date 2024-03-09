@@ -59,6 +59,7 @@
             this.bidFieldP2 = new System.Windows.Forms.Label();
             this.bidFieldP1 = new System.Windows.Forms.Label();
             this.bidFieldP3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.betButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkButton)).BeginInit();
@@ -79,12 +80,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardImage1_P1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage0_P0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage1_P0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cardImage2
             // 
             this.cardImage2.BackColor = System.Drawing.Color.Transparent;
-            this.cardImage2.Image = ((System.Drawing.Image)(resources.GetObject("cardImage2.Image")));
+            this.cardImage2.Image = global::Poker_Game.Resource.backCard;
             this.cardImage2.InitialImage = null;
             this.cardImage2.Location = new System.Drawing.Point(885, 415);
             this.cardImage2.Name = "cardImage2";
@@ -191,7 +193,7 @@
             this.balanceFieldP0.ForeColor = System.Drawing.Color.White;
             this.balanceFieldP0.Location = new System.Drawing.Point(885, 916);
             this.balanceFieldP0.Name = "balanceFieldP0";
-            this.balanceFieldP0.Size = new System.Drawing.Size(150, 50);
+            this.balanceFieldP0.Size = new System.Drawing.Size(150, 60);
             this.balanceFieldP0.TabIndex = 11;
             this.balanceFieldP0.Text = "1000";
             this.balanceFieldP0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -203,7 +205,7 @@
             this.balanceFieldP3.ForeColor = System.Drawing.Color.White;
             this.balanceFieldP3.Location = new System.Drawing.Point(1750, 380);
             this.balanceFieldP3.Name = "balanceFieldP3";
-            this.balanceFieldP3.Size = new System.Drawing.Size(150, 50);
+            this.balanceFieldP3.Size = new System.Drawing.Size(150, 60);
             this.balanceFieldP3.TabIndex = 12;
             this.balanceFieldP3.Text = "1000";
             this.balanceFieldP3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,7 +217,7 @@
             this.balanceFieldP2.ForeColor = System.Drawing.Color.White;
             this.balanceFieldP2.Location = new System.Drawing.Point(885, 8);
             this.balanceFieldP2.Name = "balanceFieldP2";
-            this.balanceFieldP2.Size = new System.Drawing.Size(150, 50);
+            this.balanceFieldP2.Size = new System.Drawing.Size(150, 60);
             this.balanceFieldP2.TabIndex = 13;
             this.balanceFieldP2.Text = "1000";
             this.balanceFieldP2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -227,7 +229,7 @@
             this.balanceFieldP1.ForeColor = System.Drawing.Color.White;
             this.balanceFieldP1.Location = new System.Drawing.Point(0, 380);
             this.balanceFieldP1.Name = "balanceFieldP1";
-            this.balanceFieldP1.Size = new System.Drawing.Size(150, 50);
+            this.balanceFieldP1.Size = new System.Drawing.Size(150, 60);
             this.balanceFieldP1.TabIndex = 14;
             this.balanceFieldP1.Text = "1000";
             this.balanceFieldP1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -271,7 +273,7 @@
             // cardImage3
             // 
             this.cardImage3.BackColor = System.Drawing.Color.Transparent;
-            this.cardImage3.Image = ((System.Drawing.Image)(resources.GetObject("cardImage3.Image")));
+            this.cardImage3.Image = global::Poker_Game.Resource.backCard;
             this.cardImage3.InitialImage = null;
             this.cardImage3.Location = new System.Drawing.Point(1041, 415);
             this.cardImage3.Name = "cardImage3";
@@ -309,7 +311,7 @@
             this.cardImage0_P2.BackColor = System.Drawing.Color.Transparent;
             this.cardImage0_P2.Image = ((System.Drawing.Image)(resources.GetObject("cardImage0_P2.Image")));
             this.cardImage0_P2.InitialImage = null;
-            this.cardImage0_P2.Location = new System.Drawing.Point(745, 61);
+            this.cardImage0_P2.Location = new System.Drawing.Point(729, 61);
             this.cardImage0_P2.Name = "cardImage0_P2";
             this.cardImage0_P2.Size = new System.Drawing.Size(150, 150);
             this.cardImage0_P2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -429,12 +431,23 @@
             this.bidFieldP3.BackColor = System.Drawing.Color.Transparent;
             this.bidFieldP3.Font = new System.Drawing.Font("Bahnschrift Condensed", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.bidFieldP3.ForeColor = System.Drawing.Color.White;
-            this.bidFieldP3.Location = new System.Drawing.Point(1644, 483);
+            this.bidFieldP3.Location = new System.Drawing.Point(1634, 491);
             this.bidFieldP3.Name = "bidFieldP3";
-            this.bidFieldP3.Size = new System.Drawing.Size(100, 67);
+            this.bidFieldP3.Size = new System.Drawing.Size(110, 50);
             this.bidFieldP3.TabIndex = 38;
             this.bidFieldP3.Text = "0";
             this.bidFieldP3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1740, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 39;
+            this.pictureBox1.TabStop = false;
             // 
             // GameForm
             // 
@@ -442,6 +455,7 @@
             this.BackColor = System.Drawing.Color.Green;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bidFieldP3);
             this.Controls.Add(this.bidFieldP1);
             this.Controls.Add(this.bidFieldP2);
@@ -497,41 +511,43 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardImage1_P1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage0_P0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage1_P0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private PictureBox cardImage2;
-        private PictureBox betButton;
-        private PictureBox checkButton;
-        private PictureBox foldButton;
-        private PictureBox playerImage1;
-        private Label bidFieldP0;
-        private PictureBox playerImage2;
-        private PictureBox playerImage3;
-        private PictureBox playerImage4;
-        private Label balanceFieldP0;
-        private Label balanceFieldP3;
-        private Label balanceFieldP2;
-        private Label balanceFieldP1;
-        private PictureBox cardImage4;
-        private PictureBox cardImage0;
-        private PictureBox cardImage1;
-        private PictureBox cardImage3;
-        private PictureBox cardImage1_P3;
-        private PictureBox cardImage0_P3;
-        private PictureBox cardImage0_P2;
-        private PictureBox cardImage1_P2;
-        private PictureBox cardImage0_P1;
-        private PictureBox cardImage1_P1;
-        private PictureBox cardImage0_P0;
-        private PictureBox cardImage1_P0;
-        private Label potText;
-        private Label potField;
-        private Label bidFieldP2;
-        private Label bidFieldP1;
-        private Label bidFieldP3;
+        protected PictureBox betButton;
+        protected PictureBox checkButton;
+        protected PictureBox foldButton;
+        protected PictureBox playerImage1;
+        protected PictureBox playerImage2;
+        protected PictureBox playerImage3;
+        protected PictureBox playerImage4;
+        protected PictureBox cardImage0;
+        protected PictureBox cardImage1;
+        protected PictureBox cardImage2;
+        protected PictureBox cardImage3;
+        protected PictureBox cardImage4;
+        protected PictureBox cardImage1_P3;
+        protected PictureBox cardImage0_P3;
+        protected PictureBox cardImage0_P2;
+        protected PictureBox cardImage1_P2;
+        protected PictureBox cardImage0_P1;
+        protected PictureBox cardImage1_P1;
+        protected PictureBox cardImage0_P0;
+        protected PictureBox cardImage1_P0;
+        protected Label balanceFieldP0;
+        protected Label balanceFieldP1;
+        protected Label balanceFieldP2;
+        protected Label balanceFieldP3;
+        protected Label bidFieldP0;
+        protected Label bidFieldP1;
+        protected Label bidFieldP2;
+        protected Label bidFieldP3;
+        protected Label potText;
+        protected Label potField;
+        protected PictureBox pictureBox1;
     }
 }
