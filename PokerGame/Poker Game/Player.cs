@@ -9,9 +9,8 @@ namespace Poker_Game
         public bool isActive;
         public Label balanceField;
         public Label bidField;
+        public string combination;
         public string[] hand = new string[2];
-
-        public int TakeBalance() { return 0; }
 
         public Player()
         {

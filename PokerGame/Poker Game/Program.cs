@@ -6,7 +6,7 @@ namespace Poker_Game
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new GameForm());
+            Application.Run(new Game());
         }
     }
 }
