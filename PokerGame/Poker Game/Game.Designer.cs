@@ -146,9 +146,9 @@
             this.bidFieldP0.BackColor = System.Drawing.Color.Transparent;
             this.bidFieldP0.Font = new System.Drawing.Font("Bahnschrift Condensed", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.bidFieldP0.ForeColor = System.Drawing.Color.White;
-            this.bidFieldP0.Location = new System.Drawing.Point(885, 703);
+            this.bidFieldP0.Location = new System.Drawing.Point(809, 683);
             this.bidFieldP0.Name = "bidFieldP0";
-            this.bidFieldP0.Size = new System.Drawing.Size(150, 67);
+            this.bidFieldP0.Size = new System.Drawing.Size(300, 60);
             this.bidFieldP0.TabIndex = 6;
             this.bidFieldP0.Text = "0";
             this.bidFieldP0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -407,9 +407,9 @@
             this.bidFieldP2.BackColor = System.Drawing.Color.Transparent;
             this.bidFieldP2.Font = new System.Drawing.Font("Bahnschrift Condensed", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.bidFieldP2.ForeColor = System.Drawing.Color.White;
-            this.bidFieldP2.Location = new System.Drawing.Point(885, 204);
+            this.bidFieldP2.Location = new System.Drawing.Point(809, 227);
             this.bidFieldP2.Name = "bidFieldP2";
-            this.bidFieldP2.Size = new System.Drawing.Size(150, 50);
+            this.bidFieldP2.Size = new System.Drawing.Size(300, 65);
             this.bidFieldP2.TabIndex = 36;
             this.bidFieldP2.Text = "0";
             this.bidFieldP2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -421,7 +421,7 @@
             this.bidFieldP1.ForeColor = System.Drawing.Color.White;
             this.bidFieldP1.Location = new System.Drawing.Point(156, 491);
             this.bidFieldP1.Name = "bidFieldP1";
-            this.bidFieldP1.Size = new System.Drawing.Size(100, 50);
+            this.bidFieldP1.Size = new System.Drawing.Size(300, 60);
             this.bidFieldP1.TabIndex = 37;
             this.bidFieldP1.Text = "0";
             this.bidFieldP1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -431,9 +431,9 @@
             this.bidFieldP3.BackColor = System.Drawing.Color.Transparent;
             this.bidFieldP3.Font = new System.Drawing.Font("Bahnschrift Condensed", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.bidFieldP3.ForeColor = System.Drawing.Color.White;
-            this.bidFieldP3.Location = new System.Drawing.Point(1634, 491);
+            this.bidFieldP3.Location = new System.Drawing.Point(1460, 491);
             this.bidFieldP3.Name = "bidFieldP3";
-            this.bidFieldP3.Size = new System.Drawing.Size(110, 50);
+            this.bidFieldP3.Size = new System.Drawing.Size(300, 60);
             this.bidFieldP3.TabIndex = 38;
             this.bidFieldP3.Text = "0";
             this.bidFieldP3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -449,7 +449,7 @@
             this.pictureBox1.TabIndex = 39;
             this.pictureBox1.TabStop = false;
             // 
-            // GameForm
+            // Game
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Green;
@@ -478,7 +478,6 @@
             this.Controls.Add(this.balanceFieldP0);
             this.Controls.Add(this.playerImage4);
             this.Controls.Add(this.playerImage3);
-            this.Controls.Add(this.playerImage2);
             this.Controls.Add(this.bidFieldP0);
             this.Controls.Add(this.playerImage1);
             this.Controls.Add(this.foldButton);
@@ -486,9 +485,10 @@
             this.Controls.Add(this.betButton);
             this.Controls.Add(this.cardImage2);
             this.Controls.Add(this.potField);
+            this.Controls.Add(this.playerImage2);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "GameForm";
+            this.Name = "Game";
             this.Text = "Poker";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.cardImage2)).EndInit();

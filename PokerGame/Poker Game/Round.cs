@@ -16,14 +16,16 @@ namespace Poker_Game
         private Deck deck = new Deck();
 
         private string[] cards = new string[7];
-        private int straightStartCardValue = 0;
-        private int highFlushCardValue = 0;
+        private int lastStraightCardValue = 0;
+        private int firstFlushCardValue = 0;
         private int combinationValue = 0;
         public string combination = "";
 
         public void dealCards(Player[] players, string[] tableCardArray)
         {
             int countCard = 0;
+
+            deck.Shuffle();
 
             for (int i = 0; i < 4; i++)
             {
@@ -43,7 +45,7 @@ namespace Poker_Game
             }
         }
 
-        public int defineCombination(int id)
+        public void defineCombination(int id, Player[] players)
         {
             addCardsToArray(id);
             Dictionary<string, int> repeatedCards;
@@ -53,81 +55,83 @@ namespace Poker_Game
             var secondCard = repeatedCards.Skip(1).FirstOrDefault();
 
             //high card
+            combinationValue = cardValues[cards[0][0].ToString()];
             for (int i = 0; i < 6; i++)
             {
-                if (cardValues[cards[i][0].ToString()] > cardValues[cards[i + 1][0].ToString()])
+                if (combinationValue < cardValues[cards[i + 1][0].ToString()])
                 {
-                    combinationValue = cardValues[cards[i][0].ToString()];
+                    combinationValue = cardValues[cards[i + 1][0].ToString()];
                 }
-                else combinationValue = cardValues[cards[i + 1][0].ToString()];
             }
             combination = "High Card";
+            int kicker = combinationValue;
             //pair
             if (firstCard.Value == 2)
             {
                 combinationValue = 13;
                 combinationValue += cardValues[firstCard.Key];
+                combinationValue += kicker;
                 combination = "One Pair";
             }
             //two pairs
             if (firstCard.Value == 2 && secondCard.Value == 2)
             {
-                combinationValue = 26;
+                combinationValue = 39;
                 combinationValue += cardValues[firstCard.Key];
-                combinationValue += cardValues[secondCard.Key];
+                combinationValue += kicker;
                 combination = "Two Pair";
             }
             //three of a kind
             if (firstCard.Value == 3)
             {
-                combinationValue = 52;
+                combinationValue = 65;
                 combinationValue += cardValues[firstCard.Key];
+                combinationValue += kicker;
                 combination = "Three Of A Kind";
             }
             //straight
             if (hasStraight(cards))
             {
-                combinationValue = 65;
-                combinationValue += straightStartCardValue;
+                combinationValue = 91;
+                combinationValue += lastStraightCardValue;
                 combination = "Straight";
             }
             //flush
             if (hasFlush(cards))
             {
-                combinationValue = 78;
-                combinationValue += highFlushCardValue;
+                combinationValue = 104;
+                combinationValue += firstFlushCardValue;
                 combination = "Flush";
             }
             //full house
-            if (firstCard.Value == 3 && secondCard.Value == 2)
+            if (firstCard.Value == 3 && secondCard.Value >= 2)
             {
-                combinationValue = 91;
+                combinationValue = 117;
                 combinationValue += cardValues[firstCard.Key];
-                combinationValue += cardValues[secondCard.Key];
                 combination = "Full House";
             }
             //four of a kind
             if (firstCard.Value == 4)
             {
-                combinationValue = 117;
+                combinationValue = 130;
                 combinationValue += cardValues[firstCard.Key];
                 combination = "Four Of A Kind";
             }
             //straight flush
             if (hasStraight(cards) && hasFlush(cards))
             {
-                combinationValue = 130;
-                combinationValue += straightStartCardValue;
-                combination = "Four Of A Kind";
+                combinationValue = 144;
+                combination = "Straight Flush";
             }
             //royal flesh
-            if (hasStraight(cards) && hasFlush(cards) && highFlushCardValue == 13)
+            if (hasStraight(cards) && hasFlush(cards) && firstFlushCardValue == 13)
             {
-                combinationValue = 144;
+                combinationValue = 145;
                 combination = "Royal Flesh";
             }
 
-            return combinationValue;
+            players[id].combination = combination;
+            players[id].combinationValue = combinationValue;
         }
 
         Dictionary<string, int> findRepeatedCards(string[] strings)
@@ -174,7 +178,7 @@ namespace Poker_Game
                     cardsRanks[i + 2] == cardsRanks[i + 3] - 1 &&
                     cardsRanks[i + 3] == cardsRanks[i + 4] - 1 )
                 {
-                    straightStartCardValue = cardsRanks[i];
+                    lastStraightCardValue = cardsRanks[i + 4];
                     return true;
                 }
             }
@@ -195,13 +199,13 @@ namespace Poker_Game
                     if (cards[i][1] == cards[j][1])
                     {
                         temp = cardValues[cards[j][0].ToString()];
-                        if (temp > highCard) highCard = temp;
+                        if (temp < highCard) highCard = temp;
                         count++;
                     }
                 }
                 if (count >= 5)
                 {
-                    highFlushCardValue = highCard;
+                    firstFlushCardValue = highCard;
                     return true;
                 }
                 count = 0;
