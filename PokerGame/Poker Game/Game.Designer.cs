@@ -60,6 +60,10 @@
             this.bidFieldP1 = new System.Windows.Forms.Label();
             this.bidFieldP3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.moveImageP1 = new System.Windows.Forms.PictureBox();
+            this.moveImageP3 = new System.Windows.Forms.PictureBox();
+            this.moveImageP2 = new System.Windows.Forms.PictureBox();
+            this.moveImageP0 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.betButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkButton)).BeginInit();
@@ -81,6 +85,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardImage0_P0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage1_P0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP0)).BeginInit();
             this.SuspendLayout();
             // 
             // cardImage2
@@ -449,12 +457,56 @@
             this.pictureBox1.TabIndex = 39;
             this.pictureBox1.TabStop = false;
             // 
+            // moveImageP1
+            // 
+            this.moveImageP1.BackColor = System.Drawing.Color.Transparent;
+            this.moveImageP1.Location = new System.Drawing.Point(0, 440);
+            this.moveImageP1.Name = "moveImageP1";
+            this.moveImageP1.Size = new System.Drawing.Size(40, 40);
+            this.moveImageP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.moveImageP1.TabIndex = 40;
+            this.moveImageP1.TabStop = false;
+            // 
+            // moveImageP3
+            // 
+            this.moveImageP3.BackColor = System.Drawing.Color.Transparent;
+            this.moveImageP3.Location = new System.Drawing.Point(1750, 440);
+            this.moveImageP3.Name = "moveImageP3";
+            this.moveImageP3.Size = new System.Drawing.Size(40, 40);
+            this.moveImageP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.moveImageP3.TabIndex = 41;
+            this.moveImageP3.TabStop = false;
+            // 
+            // moveImageP2
+            // 
+            this.moveImageP2.BackColor = System.Drawing.Color.Transparent;
+            this.moveImageP2.Location = new System.Drawing.Point(885, 61);
+            this.moveImageP2.Name = "moveImageP2";
+            this.moveImageP2.Size = new System.Drawing.Size(40, 40);
+            this.moveImageP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.moveImageP2.TabIndex = 42;
+            this.moveImageP2.TabStop = false;
+            // 
+            // moveImageP0
+            // 
+            this.moveImageP0.BackColor = System.Drawing.Color.Transparent;
+            this.moveImageP0.Location = new System.Drawing.Point(885, 773);
+            this.moveImageP0.Name = "moveImageP0";
+            this.moveImageP0.Size = new System.Drawing.Size(40, 40);
+            this.moveImageP0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.moveImageP0.TabIndex = 43;
+            this.moveImageP0.TabStop = false;
+            // 
             // Game
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Green;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.moveImageP0);
+            this.Controls.Add(this.moveImageP2);
+            this.Controls.Add(this.moveImageP3);
+            this.Controls.Add(this.moveImageP1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bidFieldP3);
             this.Controls.Add(this.bidFieldP1);
@@ -512,6 +564,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cardImage0_P0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage1_P0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveImageP0)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -549,5 +605,9 @@
         protected Label potText;
         protected Label potField;
         protected PictureBox pictureBox1;
+        private PictureBox moveImageP1;
+        private PictureBox moveImageP3;
+        private PictureBox moveImageP2;
+        private PictureBox moveImageP0;
     }
 }

@@ -11,6 +11,7 @@ namespace Poker_Game
         private Round round = new Round();
         private PictureBox[] playerCardImageArray;
         private PictureBox[] tableCardImageArray;
+        private PictureBox[] moveImageArray;
         private Label[] bidFields;
         private Label[] balanceFields;
         private List<int> winners = new List<int>();
@@ -36,6 +37,7 @@ namespace Poker_Game
             tableCardImageArray = new PictureBox[] { cardImage0, cardImage1, cardImage2, cardImage3, cardImage4 };
             bidFields = new Label[] { bidFieldP0, bidFieldP1, bidFieldP2, bidFieldP3 };
             balanceFields = new Label[] { balanceFieldP0, balanceFieldP1, balanceFieldP2, balanceFieldP3 };
+            moveImageArray = new PictureBox[] { moveImageP0, moveImageP1, moveImageP2, moveImageP3 };
             for (int i = 0; i < 4; i++)
             {
                 players[i].bidField = bidFields[i];
@@ -50,14 +52,17 @@ namespace Poker_Game
         {
             raiseBid(0, 100);
 
-
             gameRound((gameStage)roundStatus);
             roundStatus++;
         }
 
         public void foldButton_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            for (int i = 0; i < 5 - roundStatus; i++)
+            {
+                gameRound((gameStage)roundStatus);
+                roundStatus++;
+            }
         }
 
         async private void gameRound(gameStage stage)
