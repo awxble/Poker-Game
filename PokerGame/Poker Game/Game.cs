@@ -4,6 +4,9 @@ using System.Diagnostics.Tracing;
 using System.DirectoryServices;
 using System.Drawing.Text;
 using System.Security.Cryptography;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Poker_Game
@@ -12,6 +15,7 @@ namespace Poker_Game
     {
         public static Player[] players = new Player[] { new Player(), new Player(), new Player(), new Player() };
         public string[] tableCardArray = new string[5];
+        private SqlConnection sqlConnection = null;
         private Round round = new Round();
         private Random random = new Random(DateTime.Now.Millisecond);
         private PictureBox[] playerCardImageArray;
@@ -32,7 +36,8 @@ namespace Poker_Game
             textBoxLogs.AppendText(message + Environment.NewLine);
         }
 
-        private enum gameStage{
+        private enum gameStage
+        {
             Preflop,
             Flop,
             Turn,
@@ -88,12 +93,12 @@ namespace Poker_Game
 
         private void raiseBid(int id, int bid)
         {
-            
+
             if (players[id].balance > bid) { }
-            else 
+            else
             {
-                bid = players[id].balance; 
-                players[id].isAllIn = true; 
+                bid = players[id].balance;
+                players[id].isAllIn = true;
                 players[id].isActive = false;
             }
 
@@ -117,7 +122,7 @@ namespace Poker_Game
             check(0);
             gameRound((gameStage)roundStatus);
         }
-        
+
         private void check(int id)
         {
             raiseBid(id, bids.Max() - bids[id]);
@@ -268,7 +273,7 @@ namespace Poker_Game
                             moveImageArray[i].Image = Image.FromFile($"Materials\\raiseStatus.png");
                         }
                     }
-                    
+
                     players[i].balanceField.BackColor = notActiveColor;
                 }
             }
@@ -315,6 +320,7 @@ namespace Poker_Game
         private void defineWinner()
         {
             int[] scores = new int[4];
+            SqlCommand command = null;
 
             for (int i = 0; i < 4; i++)
             {
@@ -343,6 +349,17 @@ namespace Poker_Game
                 players[i].bidField.Text = players[i].combination;
                 players[i].combination = "0";
             }
+            string tableCards = "";
+            for (int i = 0;i < 5; i++)
+            {
+                tableCards += tableCardArray[i];
+                tableCards += " ";
+            }
+
+            command = new SqlCommand(
+                $"INSERT INTO [GameHistory] (Ballance, Hand, TableCards) VALUES  (N'{players[0].balance}',N'{players[0].hand[0]} {players[0].hand[1]}',N'{tableCards}')",
+                sqlConnection);
+            command.ExecuteNonQuery();
 
             scores = new int[4];
         }
@@ -379,12 +396,12 @@ namespace Poker_Game
 
         private void showTableCards(int cardQuantity)
         {
-            
+
             for (int i = 0; i < 5; i++)
             {
                 tableCardImageArray[i].Image = Image.FromFile($"Materials\\backCard.png");
             }
-            
+
             for (int i = 0; i < cardQuantity; i++)
             {
                 tableCardImageArray[i].Image = Image.FromFile($"Materials\\{tableCardArray[i]}.png");
@@ -411,6 +428,12 @@ namespace Poker_Game
                     playerCardImageArray[i].Image = Image.FromFile($"Materials\\backCard.png");
                 }
             }
+        }
+
+        private void Game_Load(object sender, EventArgs e)
+        {
+            sqlConnection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Михаил\\Desktop\\похер\\PokerGame\\Poker Game\\Database.mdf\";Integrated Security=True");
+            sqlConnection.Open();            
         }
     }
 }
