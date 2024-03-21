@@ -1,5 +1,9 @@
+using System;
 using System.ComponentModel.Design.Serialization;
+using System.Diagnostics.Tracing;
+using System.DirectoryServices;
 using System.Drawing.Text;
+using System.Security.Cryptography;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Poker_Game
@@ -9,17 +13,24 @@ namespace Poker_Game
         public static Player[] players = new Player[] { new Player(), new Player(), new Player(), new Player() };
         public string[] tableCardArray = new string[5];
         private Round round = new Round();
+        private Random random = new Random(DateTime.Now.Millisecond);
         private PictureBox[] playerCardImageArray;
         private PictureBox[] tableCardImageArray;
         private PictureBox[] moveImageArray;
         private Label[] bidFields;
         private Label[] balanceFields;
         private List<int> winners = new List<int>();
+        private List<int> bids = new List<int>() { 0, 0, 0, 0 };
         private int pot;
         private int roundStatus = 0;
-        private int delayBotMove = 300;
+        private int delayBotMove = 1000;
         private Color activeColor = Color.Gold;
         private Color notActiveColor = Color.Transparent;
+
+        private void Log(string message)
+        {
+            textBoxLogs.AppendText(message + Environment.NewLine);
+        }
 
         private enum gameStage{
             Preflop,
@@ -45,24 +56,88 @@ namespace Poker_Game
             }
 
             gameRound(gameStage.Preflop);
-            roundStatus++;
         }
 
         public void betButton_Click(object sender, EventArgs e)
         {
-            raiseBid(0, 100);
+            if (trackBar.Visible)
+            {
+                trackBar.Visible = false;
+                raiseField.Visible = false;
+                callField.Visible = false;
+                clearStatusFields();
+                moveImageArray[0].Image = Image.FromFile($"Materials\\raiseStatus.png");
+                raiseBid(0, Convert.ToInt32(raiseField.Text));
+                gameRound((gameStage)roundStatus);
+            }
+            else
+            {
+                trackBar.Visible = true;
+                raiseField.Visible = true;
+                if (bids.Max() >= players[0].balance) trackBar.Minimum = players[0].balance;
+                else trackBar.Minimum = bids.Max();
+                trackBar.Maximum = players[0].balance;
+                raiseField.Text = trackBar.Value.ToString();
+            }
+        }
 
+        private void trackBar_Scroll(object sender, EventArgs e)
+        {
+            raiseField.Text = trackBar.Value.ToString();
+        }
+
+        private void raiseBid(int id, int bid)
+        {
+            
+            if (players[id].balance > bid) { }
+            else 
+            {
+                bid = players[id].balance; 
+                players[id].isAllIn = true; 
+                players[id].isActive = false;
+            }
+
+            players[id].balance -= bid;
+            players[id].bidField.Text = (bids[id] + bid).ToString();
+            pot += bid;
+            bids[id] = bids[id] + bid;
+
+            reloadBalanceFileds();
+            for (int i = 0; i < 4; i++)
+            {
+                if (!players[i].isActive) bids[i] = bids.Max();
+            }
+        }
+
+        private void checkButton_Click(object sender, EventArgs e)
+        {
+            trackBar.Visible = false;
+            raiseField.Visible = false;
+            callField.Visible = false;
+            check(0);
             gameRound((gameStage)roundStatus);
-            roundStatus++;
+        }
+        
+        private void check(int id)
+        {
+            raiseBid(id, bids.Max() - bids[id]);
+            moveImageArray[id].Image = Image.FromFile($"Materials\\checkStatus.png");
         }
 
         public void foldButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 5 - roundStatus; i++)
-            {
-                gameRound((gameStage)roundStatus);
-                roundStatus++;
-            }
+            trackBar.Visible = false;
+            raiseField.Visible = false;
+            callField.Visible = false;
+            foldCards(0);
+            gameRound((gameStage)roundStatus);
+        }
+
+        public void foldCards(int id)
+        {
+            moveImageArray[id].Image = Image.FromFile($"Materials\\foldStatus.png");
+            players[id].isActive = false;
+            bids[id] = bids.Max();
         }
 
         async private void gameRound(gameStage stage)
@@ -74,63 +149,166 @@ namespace Poker_Game
                     round.dealCards(players, tableCardArray);
                     showPlayerCards(1);
                     showTableCards(0);
+                    roundStatus++;
                     break;
                 case gameStage.Flop:
-                    botMove();
-                    await Task.Delay(delayBotMove * 3);
-                    showTableCards(3);
+                    await botMove();
+                    if (bids.All(x => x == bids[0]))
+                    {
+                        showTableCards(3);
+                        clearStatusFields();
+                        clearBidFileds();
+                        roundStatus++;
+                    }
                     break;
                 case gameStage.Turn:
-                    botMove();
-                    await Task.Delay(delayBotMove * 3);
-                    showTableCards(4);
+                    await botMove();
+                    if (bids.All(x => x == bids[0]))
+                    {
+                        showTableCards(4);
+                        clearStatusFields();
+                        clearBidFileds();
+                        roundStatus++;
+                    }
                     break;
                 case gameStage.River:
-                    botMove();
-                    await Task.Delay(delayBotMove * 3);
-                    showTableCards(5);
+                    await botMove();
+                    if (bids.All(x => x == bids[0]))
+                    {
+                        showTableCards(5);
+                        clearStatusFields();
+                        clearBidFileds();
+                        roundStatus++;
+                    }
                     break;
                 case gameStage.ShowDown:
-                    botMove();
-                    await Task.Delay(delayBotMove * 3 + 100);
-                    showPlayerCards(4);
-                    defineWinner();
-                    await Task.Delay(4000);
-                    clearBidFileds();
-                    distributionPot();
-                    reloadFields();
-                    roundStatus = 0;
-                    gameRound(gameStage.Preflop);
-                    roundStatus++;
+                    await botMove();
+                    if (bids.All(x => x == bids[0]))
+                    {
+                        Log("Зашли в ШД");
+                        showPlayerCards(4);
+                        clearStatusFields();
+                        clearBidFileds();
+                        defineWinner();
+                        await Task.Delay(4000);
+                        clearBidFileds();
+                        distributionPot();
+                        reloadBalanceFileds();
+                        roundStatus = 0;
+
+                        if (players[0].balance == 0)
+                        {
+                            MessageBox.Show("Вы проиграли :(", "В следущий раз повезёт!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Application.Restart();
+                        }
+                        else if (players[0].balance == 4000)
+                        {
+                            MessageBox.Show("Вы победили!", "Поздравляем!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Application.Restart();
+                        }
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (players[i].balance == 0)
+                            {
+                                moveImageArray[i].Image = Image.FromFile($"Materials\\foldStatus.png");
+                                players[i].isAllIn = false;
+                                removePlayer(i);
+                            }
+                            else
+                            {
+                                moveImageArray[i].Image = null;
+                                players[i].isActive = true;
+                                players[i].isAllIn = false;
+                            }
+                        }
+
+                        gameRound(gameStage.Preflop);
+                    }
                     break;
                 default:
                     break;
             }
+
+            if (players[0].isActive) switchControlsActivity(true);
         }
 
-        async private void botMove()
+        async private Task botMove()
         {
+            int randNum;
+
             switchControlsActivity(false);
             balanceFieldP0.BackColor = notActiveColor;
 
             for (int i = 1; i < 4; i++)
             {
-                players[i].balanceField.BackColor = activeColor;
-                await Task.Delay(delayBotMove);
-                raiseBid(i, 100);
-                players[i].balanceField.BackColor = notActiveColor;
+                if (players[i].isActive)
+                {
+                    players[i].balanceField.BackColor = activeColor;
+                    await Task.Delay(delayBotMove);
+                    randNum = random.Next(0, 101);
+                    if (bids[i - 1] > bids[i])
+                    {
+                        if (randNum < 10) foldCards(i);
+                        else if (randNum < 90) check(i);
+                        else
+                        {
+                            raiseBid(i, bids[i - 1] + random.Next(1, 2) * 50);
+                            clearStatusFields();
+                            moveImageArray[i].Image = Image.FromFile($"Materials\\raiseStatus.png");
+                        }
+                    }
+                    else
+                    {
+                        if (randNum < 85) check(i);
+                        else
+                        {
+                            raiseBid(i, bids[i - 1] + random.Next(1, 2) * 50);
+                            clearStatusFields();
+                            moveImageArray[i].Image = Image.FromFile($"Materials\\raiseStatus.png");
+                        }
+                    }
+                    
+                    players[i].balanceField.BackColor = notActiveColor;
+                }
             }
 
-            clearBidFileds();
-            switchControlsActivity(true);
-            balanceFieldP0.BackColor = activeColor;
+            await Task.Delay(delayBotMove);
+            callField.Text = (bids.Max() - bids[0]).ToString();
+            if (bids.Max() - bids[0] > 0) callField.Visible = true;
+            if (players[0].isActive) balanceFieldP0.BackColor = activeColor;
+            else
+            {
+                Log("Вызван " + (gameStage)roundStatus);
+                gameRound((gameStage)roundStatus);
+            }
         }
 
-        private static void clearBidFileds()
+        private void removePlayer(int id)
+        {
+            playerCardImageArray[id * 2].Visible = false;
+            playerCardImageArray[id * 2 + 1].Visible = false;
+            players[id].balanceField.Visible = false;
+            players[id].bidField.Visible = false;
+        }
+
+        private void clearBidFileds()
         {
             for (int i = 0; i < 4; i++)
             {
                 players[i].bidField.Text = "0";
+                bids[i] = 0;
+            }
+        }
+
+        private void clearStatusFields()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (players[i].isActive)
+                {
+                    moveImageArray[i].Image = null;
+                }
             }
         }
 
@@ -140,8 +318,11 @@ namespace Poker_Game
 
             for (int i = 0; i < 4; i++)
             {
-                round.defineCombination(i, players);
-                scores[i] = players[i].combinationValue;
+                if (players[i].isActive || players[i].isAllIn)
+                {
+                    round.defineCombination(i, players);
+                    scores[i] = players[i].combinationValue;
+                }
             }
 
             for (int i = 0; i < 4; i++)
@@ -160,6 +341,7 @@ namespace Poker_Game
             for (int i = 0; i < 4; i++)
             {
                 players[i].bidField.Text = players[i].combination;
+                players[i].combination = "0";
             }
 
             scores = new int[4];
@@ -176,12 +358,13 @@ namespace Poker_Game
             pot = 0;
         }
 
-        private void reloadFields()
+        private void reloadBalanceFileds()
         {
             for (int i = 0; i < 4; i++)
             {
                 players[i].balanceField.Text = players[i].balance.ToString();
                 players[i].bidField.BackColor = Color.Transparent;
+                if (players[i].balance == 0) players[i].balanceField.Text = "All In!";
             }
 
             potField.Text = pot.ToString();
@@ -192,19 +375,6 @@ namespace Poker_Game
             betButton.Enabled = isSwitch;
             checkButton.Enabled = isSwitch;
             foldButton.Enabled = isSwitch;
-        }
-
-        private void raiseBid(int playerId, int bid)
-        {
-            players[playerId].balance -= bid;
-            players[playerId].bidField.Text = bid.ToString();
-            pot += bid;
-            reloadFields();
-        }
-
-        private void foldCards(int playerId)
-        {
-            players[playerId].isActive = false;
         }
 
         private void showTableCards(int cardQuantity)

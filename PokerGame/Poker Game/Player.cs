@@ -7,6 +7,7 @@ namespace Poker_Game
         public int id;
         public int balance;
         public bool isActive;
+        public bool isAllIn;
         public Label balanceField;
         public Label bidField;
         public int combinationValue;
@@ -16,6 +17,7 @@ namespace Poker_Game
         public Player()
         {
             isActive = true;
+            isAllIn = false;
             balance = 1000;
         }
     }

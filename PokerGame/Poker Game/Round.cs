@@ -19,7 +19,7 @@ namespace Poker_Game
         private int lastStraightCardValue = 0;
         private int firstFlushCardValue = 0;
         private int combinationValue = 0;
-        public string combination = "";
+        public string combination = "0";
 
         public void dealCards(Player[] players, string[] tableCardArray)
         {
@@ -219,25 +219,8 @@ namespace Poker_Game
         {
             int count = 8;
 
-            switch (id)
-            {
-                case 0:
-                    cards[0] = deck.shuffledCards[0];
-                    cards[1] = deck.shuffledCards[1];
-                    break;
-                case 1:
-                    cards[0] = deck.shuffledCards[2];
-                    cards[1] = deck.shuffledCards[3];
-                    break;
-                case 2:
-                    cards[0] = deck.shuffledCards[4];
-                    cards[1] = deck.shuffledCards[5];
-                    break;
-                case 3:
-                    cards[0] = deck.shuffledCards[6];
-                    cards[1] = deck.shuffledCards[7];
-                    break;
-            }
+            cards[0] = deck.shuffledCards[id * 2];
+            cards[1] = deck.shuffledCards[id * 2 + 1];
 
             for (int i = 2; i < 7; i++)
             {

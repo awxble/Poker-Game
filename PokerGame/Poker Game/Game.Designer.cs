@@ -64,6 +64,10 @@
             this.moveImageP3 = new System.Windows.Forms.PictureBox();
             this.moveImageP2 = new System.Windows.Forms.PictureBox();
             this.moveImageP0 = new System.Windows.Forms.PictureBox();
+            this.callField = new System.Windows.Forms.Label();
+            this.trackBar = new System.Windows.Forms.TrackBar();
+            this.raiseField = new System.Windows.Forms.Label();
+            this.textBoxLogs = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.cardImage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.betButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkButton)).BeginInit();
@@ -89,6 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.moveImageP3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moveImageP2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moveImageP0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // cardImage2
@@ -107,7 +112,7 @@
             // 
             this.betButton.BackColor = System.Drawing.Color.Transparent;
             this.betButton.Image = ((System.Drawing.Image)(resources.GetObject("betButton.Image")));
-            this.betButton.Location = new System.Drawing.Point(1743, 821);
+            this.betButton.Location = new System.Drawing.Point(1699, 826);
             this.betButton.Name = "betButton";
             this.betButton.Size = new System.Drawing.Size(150, 150);
             this.betButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -119,18 +124,19 @@
             // 
             this.checkButton.BackColor = System.Drawing.Color.Transparent;
             this.checkButton.Image = ((System.Drawing.Image)(resources.GetObject("checkButton.Image")));
-            this.checkButton.Location = new System.Drawing.Point(1572, 821);
+            this.checkButton.Location = new System.Drawing.Point(1528, 826);
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(150, 150);
             this.checkButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.checkButton.TabIndex = 3;
             this.checkButton.TabStop = false;
+            this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
             // 
             // foldButton
             // 
             this.foldButton.BackColor = System.Drawing.Color.Transparent;
             this.foldButton.Image = ((System.Drawing.Image)(resources.GetObject("foldButton.Image")));
-            this.foldButton.Location = new System.Drawing.Point(1399, 821);
+            this.foldButton.Location = new System.Drawing.Point(1355, 826);
             this.foldButton.Name = "foldButton";
             this.foldButton.Size = new System.Drawing.Size(150, 150);
             this.foldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -450,7 +456,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1740, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(1699, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 150);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -480,7 +486,7 @@
             // moveImageP2
             // 
             this.moveImageP2.BackColor = System.Drawing.Color.Transparent;
-            this.moveImageP2.Location = new System.Drawing.Point(885, 61);
+            this.moveImageP2.Location = new System.Drawing.Point(885, 71);
             this.moveImageP2.Name = "moveImageP2";
             this.moveImageP2.Size = new System.Drawing.Size(40, 40);
             this.moveImageP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -497,12 +503,67 @@
             this.moveImageP0.TabIndex = 43;
             this.moveImageP0.TabStop = false;
             // 
+            // callField
+            // 
+            this.callField.BackColor = System.Drawing.Color.Transparent;
+            this.callField.Font = new System.Drawing.Font("Bahnschrift Condensed", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.callField.ForeColor = System.Drawing.Color.White;
+            this.callField.Location = new System.Drawing.Point(1528, 763);
+            this.callField.Name = "callField";
+            this.callField.Size = new System.Drawing.Size(150, 60);
+            this.callField.TabIndex = 44;
+            this.callField.Text = "0";
+            this.callField.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.callField.Visible = false;
+            // 
+            // trackBar
+            // 
+            this.trackBar.AutoSize = false;
+            this.trackBar.BackColor = System.Drawing.Color.CadetBlue;
+            this.trackBar.Location = new System.Drawing.Point(1857, 716);
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar.Size = new System.Drawing.Size(33, 250);
+            this.trackBar.SmallChange = 50;
+            this.trackBar.TabIndex = 46;
+            this.trackBar.TickFrequency = 50;
+            this.trackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar.Visible = false;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
+            // 
+            // raiseField
+            // 
+            this.raiseField.BackColor = System.Drawing.Color.Transparent;
+            this.raiseField.Font = new System.Drawing.Font("Bahnschrift Condensed", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.raiseField.ForeColor = System.Drawing.Color.White;
+            this.raiseField.Location = new System.Drawing.Point(1701, 763);
+            this.raiseField.Name = "raiseField";
+            this.raiseField.Size = new System.Drawing.Size(150, 60);
+            this.raiseField.TabIndex = 47;
+            this.raiseField.Text = "0";
+            this.raiseField.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.raiseField.Visible = false;
+            // 
+            // textBoxLogs
+            // 
+            this.textBoxLogs.Location = new System.Drawing.Point(221, 683);
+            this.textBoxLogs.Multiline = true;
+            this.textBoxLogs.Name = "textBoxLogs";
+            this.textBoxLogs.ReadOnly = true;
+            this.textBoxLogs.Size = new System.Drawing.Size(200, 293);
+            this.textBoxLogs.TabIndex = 48;
+            this.textBoxLogs.Visible = false;
+            // 
             // Game
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Green;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.textBoxLogs);
+            this.Controls.Add(this.raiseField);
+            this.Controls.Add(this.trackBar);
+            this.Controls.Add(this.callField);
             this.Controls.Add(this.moveImageP0);
             this.Controls.Add(this.moveImageP2);
             this.Controls.Add(this.moveImageP3);
@@ -568,7 +629,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.moveImageP3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.moveImageP2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.moveImageP0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -609,5 +672,9 @@
         private PictureBox moveImageP3;
         private PictureBox moveImageP2;
         private PictureBox moveImageP0;
+        protected Label callField;
+        private TrackBar trackBar;
+        protected Label raiseField;
+        private TextBox textBoxLogs;
     }
 }
