@@ -1,13 +1,5 @@
-using System;
-using System.ComponentModel.Design.Serialization;
-using System.Diagnostics.Tracing;
-using System.DirectoryServices;
-using System.Drawing.Text;
-using System.Security.Cryptography;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Poker_Game
 {
@@ -15,7 +7,7 @@ namespace Poker_Game
     {
         public static Player[] players = new Player[] { new Player(), new Player(), new Player(), new Player() };
         public string[] tableCardArray = new string[5];
-        private SqlConnection sqlConnection = null;
+        //private SqlConnection sqlConnection = null;
         private Round round = new Round();
         private Random random = new Random(DateTime.Now.Millisecond);
         private PictureBox[] playerCardImageArray;
@@ -26,8 +18,9 @@ namespace Poker_Game
         private List<int> winners = new List<int>();
         private List<int> bids = new List<int>() { 0, 0, 0, 0 };
         private int pot;
+        private int anteId = 1;
         private int roundStatus = 0;
-        private int delayBotMove = 1000;
+        private int delayBotMove = 700;
         private Color activeColor = Color.Gold;
         private Color notActiveColor = Color.Transparent;
 
@@ -65,6 +58,8 @@ namespace Poker_Game
 
         public void betButton_Click(object sender, EventArgs e)
         {
+            int maxOtherBalance = players.Where(p => p != players[0]).Max(p => p.balance);
+
             if (trackBar.Visible)
             {
                 trackBar.Visible = false;
@@ -81,19 +76,28 @@ namespace Poker_Game
                 raiseField.Visible = true;
                 if (bids.Max() >= players[0].balance) trackBar.Minimum = players[0].balance;
                 else trackBar.Minimum = bids.Max();
-                trackBar.Maximum = players[0].balance;
+                if (players[0].balance > maxOtherBalance)
+                {
+                    trackBar.Maximum = players.OrderByDescending(p => p.balance).Skip(1).FirstOrDefault().balance;
+                }
+                else
+                {
+                    trackBar.Maximum = players[0].balance;
+                }
+                Log(trackBar.Maximum.ToString());
                 raiseField.Text = trackBar.Value.ToString();
             }
         }
 
-        private void trackBar_Scroll(object sender, EventArgs e)
+        private void trackBar_ValueChanged(object sender, EventArgs e)
         {
+            int roundedValue = (int)Math.Round((double)trackBar.Value / 5) * 5;
+            trackBar.Value = roundedValue;
             raiseField.Text = trackBar.Value.ToString();
         }
 
         private void raiseBid(int id, int bid)
         {
-
             if (players[id].balance > bid) { }
             else
             {
@@ -154,6 +158,7 @@ namespace Poker_Game
                     round.dealCards(players, tableCardArray);
                     showPlayerCards(1);
                     showTableCards(0);
+                    placeAnteBets();
                     roundStatus++;
                     break;
                 case gameStage.Flop:
@@ -165,6 +170,10 @@ namespace Poker_Game
                         clearBidFileds();
                         roundStatus++;
                     }
+                    if (!players[0].isActive)
+                    {
+                        gameRound((gameStage)roundStatus);
+                    }
                     break;
                 case gameStage.Turn:
                     await botMove();
@@ -174,6 +183,10 @@ namespace Poker_Game
                         clearStatusFields();
                         clearBidFileds();
                         roundStatus++;
+                    }
+                    if (!players[0].isActive)
+                    {
+                        gameRound((gameStage)roundStatus);
                     }
                     break;
                 case gameStage.River:
@@ -185,12 +198,15 @@ namespace Poker_Game
                         clearBidFileds();
                         roundStatus++;
                     }
+                    if (!players[0].isActive)
+                    {
+                        gameRound((gameStage)roundStatus);
+                    }
                     break;
                 case gameStage.ShowDown:
                     await botMove();
                     if (bids.All(x => x == bids[0]))
                     {
-                        Log("Зашли в ШД");
                         showPlayerCards(4);
                         clearStatusFields();
                         clearBidFileds();
@@ -230,12 +246,26 @@ namespace Poker_Game
 
                         gameRound(gameStage.Preflop);
                     }
+                    if (!players[0].isActive)
+                    {
+                        gameRound((gameStage)roundStatus);
+                    }
                     break;
                 default:
                     break;
             }
 
             if (players[0].isActive) switchControlsActivity(true);
+        }
+
+        private void placeAnteBets()
+        {
+            raiseBid(anteId, 50);
+            raiseBid((anteId + 1) % 4, 100);
+            callField.Text = (bids.Max() - bids[0]).ToString();
+            if (bids.Max() - bids[0] > 0) callField.Visible = true;
+
+            anteId = (anteId + 1) % 4;
         }
 
         async private Task botMove()
@@ -247,6 +277,12 @@ namespace Poker_Game
 
             for (int i = 1; i < 4; i++)
             {
+                if (bids.All(x => x == bids[0]) && bids.All(x => x != 0))
+                {
+                    await Task.Delay(delayBotMove);
+                    return;
+                }
+
                 if (players[i].isActive)
                 {
                     players[i].balanceField.BackColor = activeColor;
@@ -282,11 +318,6 @@ namespace Poker_Game
             callField.Text = (bids.Max() - bids[0]).ToString();
             if (bids.Max() - bids[0] > 0) callField.Visible = true;
             if (players[0].isActive) balanceFieldP0.BackColor = activeColor;
-            else
-            {
-                Log("Вызван " + (gameStage)roundStatus);
-                gameRound((gameStage)roundStatus);
-            }
         }
 
         private void removePlayer(int id)
@@ -320,7 +351,7 @@ namespace Poker_Game
         private void defineWinner()
         {
             int[] scores = new int[4];
-            SqlCommand command = null;
+            //SqlCommand command = null;
 
             for (int i = 0; i < 4; i++)
             {
@@ -349,17 +380,17 @@ namespace Poker_Game
                 players[i].bidField.Text = players[i].combination;
                 players[i].combination = "0";
             }
-            string tableCards = "";
+            /*string tableCards = "";
             for (int i = 0;i < 5; i++)
             {
                 tableCards += tableCardArray[i];
                 tableCards += " ";
-            }
+            }*/
 
-            command = new SqlCommand(
+            /*command = new SqlCommand(
                 $"INSERT INTO [GameHistory] (Ballance, Hand, TableCards) VALUES  (N'{players[0].balance}',N'{players[0].hand[0]} {players[0].hand[1]}',N'{tableCards}')",
                 sqlConnection);
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();*/
 
             scores = new int[4];
         }
@@ -430,10 +461,10 @@ namespace Poker_Game
             }
         }
 
-        private void Game_Load(object sender, EventArgs e)
+        /*private void Game_Load(object sender, EventArgs e)
         {
-            sqlConnection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Михаил\\Desktop\\похер\\PokerGame\\Poker Game\\Database.mdf\";Integrated Security=True");
+            sqlConnection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\User\\Desktop\\Poker\\Poker-Game\\PokerGame\\Poker Game\\Database.mdf\";Integrated Security=True");
             sqlConnection.Open();            
-        }
+        }*/
     }
 }
